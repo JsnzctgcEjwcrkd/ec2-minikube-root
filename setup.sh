@@ -1,15 +1,10 @@
 #! /bin/sh
 
-if [[ `whoami` != "root" ]]
-then
-    echo "please exec by root user"
-    exit 1
-fi
-
 ## update ubuntu
 sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
+sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
 apt update
-apt upgrade
+apt upgrade -y
 
 ## allow root login & set ssh alive interval
 new_sshd_config="./sshd_config"
