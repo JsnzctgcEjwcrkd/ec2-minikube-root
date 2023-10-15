@@ -65,6 +65,14 @@ apt-get install -y ubuntu-desktop
 ## xrdp
 apt-get install -y xrdp
 systemctl enable xrdp
+cat <<EOF | tee /etc/polkit-1/localauthority/50-local.d/xrdp-color-manager.pkla  
+[Netowrkmanager]  
+Identity=unix-user:*  
+Action=org.freedesktop.color-manager.create-device  
+ResultAny=no  
+ResultInactive=no  
+ResultActive=yes  
+EOF
 
 echo ---------------------------------------------------
 echo Run the command below to complete the installation.
