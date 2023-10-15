@@ -1,4 +1,4 @@
-# ec2-minikube
+# ec2-minikube-root
 
 1. Run setup.sh as root user
 
