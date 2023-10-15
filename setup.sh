@@ -1,5 +1,5 @@
 #! /bin/sh
-
+date
 ## update ubuntu
 sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
 sed -i "/#\$nrconf{restart} = 'i';/s/.*/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
@@ -29,6 +29,11 @@ VERSION="v1.28.0"
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-$VERSION-linux-amd64.tar.gz
 tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
 rm -f crictl-$VERSION-linux-amd64.tar.gz
+
+## kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+mv ./kubectl /usr/local/bin/kubectl
 
 ## docker
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -70,3 +75,4 @@ echo minikube start --vm-driver=none
 echo minikube addons enable ingress
 echo ---------------------------------------------------
 echo done.
+date
