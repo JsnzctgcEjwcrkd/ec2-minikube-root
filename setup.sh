@@ -7,7 +7,9 @@ then
 fi
 
 ## update ubuntu
-apt update && DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
+apt update
+apt upgrade
 
 ## allow root login & set ssh alive interval
 new_sshd_config="./sshd_config"
